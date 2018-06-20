@@ -59,15 +59,20 @@ void set()
    lcd.clear();
   // screen(0,0,1);
    screen(2,0,"time");
-   screen(0,1,"00:00");
+   screen(0,1,"00:00-00:00");
+   
    for(int i=0;i<n;i++)
    {
-    String s="00:00";
+    String s="00:00",s1="00:00";
     int ch10=0,ch1=0,min10=0,min1=0;
+    int h10=0,h1=0,m10=0,m1=0;
     lcd.clear();
     screen(0,0,i+1);
     screen(inden(i+1)+1,0,"time");
     screen(0,1,s);
+    screen(5,1,"-");
+    screen(6,1,s1);
+    //////////////////////////////////////////////////////
     while(!click(btgr))
     {
       if(click(btwh))
@@ -89,15 +94,96 @@ void set()
         screen(0,0,i+1);
         screen(inden(i+1)+1,0,"time");
         screen(0,1,s);
+        screen(5,1,"-");
+        screen(6,1,s1);
         Serial.print(i,' ');
         Serial.print(s);
         Serial.print('\n');
         delay(100);
       }
-      
+      if(click(btye))
+      {
+        ch1++;
+          if(ch1>=10)
+          {
+            ch1-=10;
+            ch10++;
+          }
+          if(ch10*10+ch1>=24)
+          {
+            ch10=0;
+            ch1=0; 
+          }
+        s[1]=char(ch1+48);
+        s[0]=char(ch10+48);
+        lcd.clear();
+        screen(0,0,i+1);
+        screen(inden(i+1)+1,0,"time");
+        screen(0,1,s);
+        screen(5,1,"-");
+        screen(6,1,s1);
+        Serial.print(i,' ');
+        Serial.print(s);
+        Serial.print('\n');
+        delay(100);
+      }
+    }
+    delay(300);
+      //////////////////////////////////////////////////////
+      while(!click(btgr))
+    {
+      if(click(btwh))
+      {
+        m1++;
+          if(m1>=10)
+          {
+            m1-=10;
+            m10++;
+          }
+          if(m10>=6)
+          {
+            m10=0;
+            m1=0; 
+          }
+        s1[4]=char(m1+48);
+        s1[3]=char(m10+48);
+        lcd.clear();
+        screen(0,0,i+1);
+        screen(inden(i+1)+1,0,"time");
+        screen(0,1,s);
+        screen(5,1,"-");
+        screen(6,1,s1);
+        
+        delay(100);
+      }
+      if(click(btye))
+      {
+        h1++;
+          if(ch1>=10)
+          {
+            h1-=10;
+            h10++;
+          }
+          if(ch10*10+ch1>=24)
+          {
+            h10=0;
+            h1=0; 
+          }
+        s1[1]=char(h1+48);
+        s1[0]=char(h10+48);
+        lcd.clear();
+        screen(0,0,i+1);
+        screen(inden(i+1)+1,0,"time");
+        screen(0,1,s);
+        screen(5,1,"-");
+        screen(6,1,s1);
+        delay(100);
+      }
+      //////////////////////////////////////////////////////////
     }
     delay(300);
    }
+
 }
   
 
