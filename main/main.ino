@@ -6,6 +6,8 @@ int btgr=5;
 int btbl=4;
 int btye=3;
 int btwh=2;
+int j=0;
+int size=0;
 int inden(int n)
 {
   int ans=0;
@@ -36,6 +38,11 @@ void setup()
   Serial.begin(9600);
   screen(0,0,str);
   set();
+  for(int i=0;i<size;i++)
+  {
+    Serial.print(time_change[i]);
+    Serial.print("\n");
+  } 
 }
 void set()
 {
@@ -54,7 +61,8 @@ void set()
         delay(100);
       }
   }
-  time_change=new String[n]; 
+  size=n*2;
+  time_change=new String[n*2]; 
   delay(300);
    lcd.clear();
   // screen(0,0,1);
@@ -96,11 +104,10 @@ void set()
         screen(0,1,s);
         screen(5,1,"-");
         screen(6,1,s1);
-        Serial.print(i,' ');
-        Serial.print(s);
-        Serial.print('\n');
+        
         delay(100);
       }
+      
       if(click(btye))
       {
         ch1++;
@@ -122,12 +129,12 @@ void set()
         screen(0,1,s);
         screen(5,1,"-");
         screen(6,1,s1);
-        Serial.print(i,' ');
-        Serial.print(s);
-        Serial.print('\n');
+        
         delay(100);
       }
     }
+    time_change[j]=s;
+    j++;
     delay(300);
       //////////////////////////////////////////////////////
       while(!click(btgr))
@@ -159,12 +166,12 @@ void set()
       if(click(btye))
       {
         h1++;
-          if(ch1>=10)
+          if(h1>=10)
           {
             h1-=10;
             h10++;
           }
-          if(ch10*10+ch1>=24)
+          if(h10*10+h1>=24)
           {
             h10=0;
             h1=0; 
@@ -181,6 +188,8 @@ void set()
       }
       //////////////////////////////////////////////////////////
     }
+    time_change[j]=s1;
+    j++;
     delay(300);
    }
 
