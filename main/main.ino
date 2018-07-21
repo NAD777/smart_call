@@ -174,7 +174,8 @@ void set()
   }
   else
   {
-  size=n*2;
+  size=n*2+1;
+  time_change[size-1]="0";
   time_change=new String[n*2]; 
   delay(300);
   
@@ -378,21 +379,27 @@ void loop()
   }
   if(click(btwh))
   {
-    time1--;    
+    time1--; 
+    if(time1<0)
+      time1=0;   
     lcd.clear();
     screen(0,0,"Time:");
     screen(6,0,time.gettime("H:i:s"));
     screen(0,1,"Call:");
     screen(6,1,time_change[time1]);
+    delay(150);
   }
   if(click(btye))
   {
-    time1++;    
+    time1++;
+    if(time1>size)
+      time1=size;     
     lcd.clear();
     screen(0,0,"Time:");
     screen(6,0,time.gettime("H:i:s"));
     screen(0,1,"Call:");
     screen(6,1,time_change[time1]);
+    delay(150);
   }
 }
 
