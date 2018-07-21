@@ -40,7 +40,7 @@ void setup()
   pinMode(Relay, OUTPUT);   
   lcd.begin();
   time.begin();
-  time.settime(0,0,0,0,0,0,0);    // Записываем время в модуль: 0 сек, 51 мин, 21 час, 27, октября, 2015 года, вторник.
+  //time.settime(0,0,0,0,0,0,0);    // Записываем время в модуль: 0 сек, 51 мин, 21 час, 27, октября, 2015 года, вторник.
   lcd.backlight();
   Serial.begin(9600);
   
@@ -246,6 +246,20 @@ void set()
         
         delay(100);
       }
+      if(click(btbl))
+      {
+        ch10=0;
+        ch1=0;
+        min10=0;
+        min1=0;
+        s="00:00";
+        lcd.clear();
+        screen(0,0,i+1);
+        screen(inden(i+1)+1,0,"time");
+        screen(0,1,s);
+        screen(5,1,"-");
+        screen(6,1,s1);
+      }
     }
     time_change[j]=s;
     j++;
@@ -301,6 +315,20 @@ void set()
         delay(100);
       }
       //////////////////////////////////////////////////////////
+      if(click(btbl))
+      {
+        h10=0;
+        h1=0;
+        m10=0;
+        m1=0;
+        s1="00:00";
+        lcd.clear();
+        screen(0,0,i+1);
+        screen(inden(i+1)+1,0,"time");
+        screen(0,1,s);
+        screen(5,1,"-");
+        screen(6,1,s1);
+      }
     }
     time_change[j]=s1;
     j++;
